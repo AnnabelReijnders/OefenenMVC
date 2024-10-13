@@ -8,7 +8,6 @@ namespace OefenenMVC.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Maak de Themes tabel aan
             migrationBuilder.CreateTable(
                 name: "Themes",
                 columns: table => new
@@ -22,7 +21,6 @@ namespace OefenenMVC.Migrations
                     table.PrimaryKey("PK_Themes", x => x.ThemeID);
                 });
 
-            // Voeg hier voorbeelddata toe als dat nodig is
             migrationBuilder.InsertData(
                 table: "Themes",
                 columns: new[] { "ThemeID", "Name" },

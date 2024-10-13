@@ -34,8 +34,6 @@ namespace OefenenMVC.Controllers
             return View(user);
         }
 
-        // Verwijder de bewerkfunctionaliteit
-
         // Actie voor het weergeven van aangekochte tickets
         public async Task<IActionResult> Tickets()
         {

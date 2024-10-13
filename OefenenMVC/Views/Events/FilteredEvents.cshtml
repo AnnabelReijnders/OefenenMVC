@@ -9,59 +9,59 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         body {
-            background-color: #1b1b1b; /* Zwart thema */
-            color: #ffffff; /* Witte tekst */
+            background-color: #1b1b1b;
+            color: #ffffff;
         }
 
         h1 {
-            color: #FFA500; /* Oranje voor de titel */
-            margin-bottom: 30px; /* Ruimte onder de titel */
+            color: #FFA500;
+            margin-bottom: 30px;
         }
 
         .card {
-            background-color: #333; /* Donkergrijs voor kaarten */
-            border: none; /* Geen rand */
-            width: 300px; /* Vaste breedte voor kaarten */
-            height: 400px; /* Vaste hoogte voor kaarten */
+            background-color: #333;
+            border: none;
+            width: 300px;
+            height: 400px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Ruimte tussen elementen */
+            justify-content: space-between;
         }
 
             .card:hover {
-                cursor: pointer; /* Cursor veranderen naar pointer bij hover */
-                transform: scale(1.05); /* Klein effect bij hover */
-                transition: transform 0.2s; /* Smooth transition */
+                cursor: pointer;
+                transform: scale(1.05); 
+                transition: transform 0.2s;
             }
 
         .card-img-top {
-            height: 200px; /* Vaste hoogte voor afbeeldingen */
-            object-fit: cover; /* Beeld vullen zonder vervorming */
+            height: 200px;
+            object-fit: cover;
         }
 
         .card-body {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centraal uitlijnen */
-            justify-content: center; /* Centraal uitlijnen */
-            text-align: center; /* Tekst centreren */
-            flex-grow: 1; /* Zorg ervoor dat de body de ruimte gebruikt */
+            align-items: center;
+            justify-content: center;
+            text-align: center; 
+            flex-grow: 1;
         }
 
         .btn-primary {
-            background-color: #f77f00; /* Oranje knop */
+            background-color: #f77f00;
             border: none;
         }
 
             .btn-primary:hover {
-                background-color: #ff8c00; /* Lichtere oranje bij hover */
+                background-color: #ff8c00;
             }
     </style>
 </head>
 <body>
 
     <div class="container mt-4">
-        <h1>Evenementen</h1> <!-- Titel in oranje -->
+        <h1>Evenementen</h1> 
         <div class="row">
             @foreach (var evenement in Model)
             {

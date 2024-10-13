@@ -9,33 +9,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
     <style>
-        /* CSS voor hover-effecten */
         .navbar-nav .nav-link {
-            transition: none; /* Standaard geen overgang */
+            transition: none;
         }
 
-            /* Hover-effecten alleen voor specifieke pagina's */
-            /* Voeg hier je logica toe om hover-effecten toe te passen */
             .navbar-nav .nav-link:hover {
-                background-color: rgba(255, 165, 0, 0.2); /* Lichte oranje achtergrond bij hover */
-                color: #FFA500; /* Oranje tekstkleur */
+                background-color: rgba(255, 165, 0, 0.2);
+                color: #FFA500;
             }
 
-            /* Specifieke stijlen voor knoppen op pagina's waar hover niet nodig is */
             .navbar-nav .nav-link:not(.active) {
-                cursor: default; /* Geen pointer cursor */
+                cursor: default;
             }
 
-            /* Verwijder hover-effecten voor specifieke links */
             .navbar-nav .nav-link[asp-action="Start"],
             .navbar-nav .nav-link[asp-action="Tickets"],
             .navbar-nav .nav-link[asp-action="FilteredEvents"] {
-                cursor: pointer; /* Handcursor voor specifieke knoppen */
+                cursor: pointer;
             }
     </style>
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
-    <!-- Flexbox voor de body -->
 
     <header>
         <nav class="navbar navbar-expand-sm navbar-dark">
@@ -90,7 +84,6 @@
     </header>
 
     <div class="container flex-grow-1">
-        <!-- Flex-grow voor de container -->
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

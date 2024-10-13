@@ -49,7 +49,6 @@ namespace OefenenMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Opslaan van de afbeelding
                 if (imageFile != null && imageFile.Length > 0)
                 {
                     using (var memoryStream = new MemoryStream())
@@ -92,14 +91,12 @@ namespace OefenenMVC.Controllers
             {
                 try
                 {
-                    // Retrieve the existing event without tracking
                     var existingEvent = await _context.Events.AsNoTracking().FirstOrDefaultAsync(e => e.EventID == id);
                     if (existingEvent == null)
                     {
                         return NotFound();
                     }
 
-                    // If a new image is uploaded, save it
                     if (imageFile != null && imageFile.Length > 0)
                     {
                         using (var memoryStream = new MemoryStream())
@@ -111,7 +108,6 @@ namespace OefenenMVC.Controllers
                     }
                     else
                     {
-                        // If no new image is uploaded, retain the existing image
                         @event.ImageData = existingEvent.ImageData;
                         @event.ImageMimeType = existingEvent.ImageMimeType;
                     }
@@ -176,7 +172,7 @@ namespace OefenenMVC.Controllers
         // POST: Events/PurchaseTickets
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize] // Zorg ervoor dat alleen ingelogde gebruikers tickets kunnen kopen
+        [Authorize]
         public async Task<IActionResult> PurchaseTickets(int eventId, int quantity)
         {
             var eventDetails = await _context.Events.FindAsync(eventId);
@@ -185,8 +181,7 @@ namespace OefenenMVC.Controllers
                 return NotFound();
             }
 
-            // Controleer of er voldoende plaatsen zijn
-            if (eventDetails.SoldTickets + quantity > eventDetails.MaxParticipants)
+            if (eventDetails.AvailableSpots < quantity) 
             {
                 ModelState.AddModelError("", "Niet genoeg beschikbare plaatsen.");
                 return RedirectToAction("Details", new { id = eventId });
@@ -194,7 +189,6 @@ namespace OefenenMVC.Controllers
 
             var totalPrice = eventDetails.Cost * quantity;
 
-            // Voeg de gekochte tickets toe aan de gebruiker
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == User.Identity.Name);
             var ticket = new Ticket
             {
@@ -205,10 +199,10 @@ namespace OefenenMVC.Controllers
             };
 
             _context.Tickets.Add(ticket);
-            eventDetails.SoldTickets += quantity; // Update de verkochte tickets
+            eventDetails.SoldTickets += quantity;
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("OrderConfirmation"); // Zorg ervoor dat je een view hebt voor de bevestiging
+            return RedirectToAction("OrderConfirmation");
         }
 
         // GET: Events/GetImage/5
@@ -227,10 +221,10 @@ namespace OefenenMVC.Controllers
             return _context.Events.Any(e => e.EventID == id);
         }
 
-        // Bevestigingspagina
+
         public IActionResult OrderConfirmation()
         {
-            return View(); // Zorg ervoor dat je een view hebt voor de bevestiging
+            return View(); 
         }
     }
 }

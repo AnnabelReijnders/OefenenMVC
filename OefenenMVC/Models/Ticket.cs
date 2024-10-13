@@ -13,8 +13,8 @@ namespace OefenenMVC.Models
         public int EventId { get; set; }
         public Event Event { get; set; }
 
-        public int Quantity { get; set; }  // Aantal gekochte tickets
-        public decimal TotalPrice { get; set; }  // Totale prijs van de gekochte tickets
+        public int Quantity { get; set; } 
+        public decimal TotalPrice { get; set; } 
 
     }
 }

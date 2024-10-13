@@ -1,65 +1,60 @@
 /* site.css */
 
-/* Algemene body stijlen */
 body {
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Donkere achtergrondkleur */
-    color: #f5f5f5; /* Lichtkleurige tekst */
+    background-color: #121212;
+    color: #f5f5f5;
 }
 
-/* Navigatiebalk */
 .navbar {
-    background-color: #1a1a1a; /* Donkere kleur voor de navbar */
+    background-color: #1a1a1a;
 }
 
 .navbar-brand, .nav-link {
-    color: #FFA500; /* Oranje kleur voor tekst */
+    color: #FFA500;
 }
 
     .navbar-brand:hover, .nav-link:hover {
-        color: #FFD700; /* Goudkleur bij hover */
+        color: #FFD700;
     }
 
-/* Footer stijl */
 .footer {
-    background-color: #1a1a1a; /* Donkere kleur voor de footer */
-    color: #FFA500; /* Oranje kleur voor footer tekst */
+    background-color: #1a1a1a;
+    color: #FFA500;
 }
 
-/* Stijlen voor de kaarten */
 .card {
-    background-color: #444; /* Donkergrijs voor kaarten */
-    border: none; /* Geen rand */
-    transition: transform 0.2s; /* Smooth transition */
-    margin-bottom: 20px; /* Ruimte tussen kaarten */
+    background-color: #444;
+    border: none;
+    transition: transform 0.2s;
+    margin-bottom: 20px;
 }
 
     .card:hover {
-        cursor: pointer; /* Cursor veranderen naar pointer bij hover */
-        transform: scale(1.05); /* Klein effect bij hover */
+        cursor: pointer;
+        transform: scale(1.05);
     }
 
 .card-body {
-    padding: 15px; /* Padding voor de inhoud van de kaart */
+    padding: 15px;
 }
 
 .card-img-top {
-    height: 200px; /* Vaste hoogte voor afbeeldingen */
-    object-fit: cover; /* Beeld vullen zonder vervorming */
+    height: 200px;
+    object-fit: cover;
 }
 
 .modal-content {
-    background-color: #444; /* Donkergrijs voor modal */
-    color: white; /* Witte tekst in modal */
+    background-color: #444;
+    color: white;
 }
 
-/* Specifieke stijlen voor uitverkocht */
 .out-of-stock {
-    background-color: white; /* Witte achtergrond voor uitverkocht */
-    color: red; /* Rode tekst voor uitverkocht */
-    text-align: center; /* Centraal uitlijnen */
+    background-color: white;
+    color: red;
+    text-align: center;
     padding: 10px;
     border-radius: 5px;
-    margin-top: 10px; /* Ruimte boven */
+    margin-top: 10px;
 }

@@ -26,7 +26,8 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            var totalIncome = item.SoldTickets * item.Cost; // Bereken de totale inkomsten van de verkochte tickets
+            // Bereken de totale inkomsten van de verkochte tickets
+            var totalIncome = item.SoldTickets * item.Cost;
 
             <div class="col-md-4 mb-4">
                 <div class="card">
@@ -36,7 +37,7 @@
                     }
 
                     <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
+                        <h5 class="card-title text-center">@item.Name</h5>
                         <p class="card-text">Datum: @item.Date.ToString("dd MMM yyyy")</p>
                         <p class="card-text">Tijd: @item.Time.ToString(@"hh\:mm")</p>
                         <p class="card-text">Max Deelnemers: @item.MaxParticipants</p>
@@ -54,3 +55,7 @@
         }
     </div>
 </div>
+
+<!-- Voeg jQuery en Bootstrap JavaScript toe zonder Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

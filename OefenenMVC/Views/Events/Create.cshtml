@@ -1,11 +1,11 @@
 ﻿@model OefenenMVC.Models.Event
 
 @{
-    ViewData["Title"] = "Evenement Aanmaken";
+    ViewData["Title"] = "Evenement aanmaken";
 }
 
 <div class="container mt-4">
-    <h1 class="text-light">Evenement Aanmaken</h1>
+    <h1 class="text-light">Evenement aanmaken</h1>
 
     <div class="card bg-dark text-white">
         <div class="card-body">
@@ -13,7 +13,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label">Evenement Naam</label>
+                    <label asp-for="Name" class="control-label">Evenement naam</label>
                     <input asp-for="Name" class="form-control" placeholder="Vul de naam van het evenement in" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label asp-for="Date" class="control-label">Datum</label>
-                    <input asp-for="Date" class="form-control" type="date" />
+                    <input asp-for="Date" class="form-control" type="date" required min="@DateTime.Today.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
 
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="MaxParticipants" class="control-label">Maximale Deelnemers</label>
+                    <label asp-for="MaxParticipants" class="control-label">Maximale deelnemers</label>
                     <input asp-for="MaxParticipants" class="form-control" placeholder="Vul het aantal deelnemers in" />
                     <span asp-validation-for="MaxParticipants" class="text-danger"></span>
                 </div>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Afbeelding Uploaden</label>
+                    <label>Afbeelding uploaden</label>
                     <div id="imageUpload" style="border: 2px dashed #FFA500; height: 200px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative;">
                         <span>Klik hier om een afbeelding te uploaden</span>
                         <input type="file" name="ImageFile" class="form-control-file" style="display:none;" accept="image/*" onchange="previewImage(event)" />
@@ -121,16 +121,16 @@
             const file = event.target.files[0];
             const reader = new FileReader();
 
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result; // Set the src to the result from FileReader
-                imagePreview.style.display = 'block'; // Show the image
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
             };
 
             if (file) {
-                reader.readAsDataURL(file); // Read the file as a data URL
+                reader.readAsDataURL(file);
             } else {
-                imagePreview.src = '#'; // Reset the src if no file is selected
-                imagePreview.style.display = 'none'; // Hide the image
+                imagePreview.src = '#';
+                imagePreview.style.display = 'none';
             }
         }
     </script>

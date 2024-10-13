@@ -51,21 +51,16 @@ namespace OefenenMVC.Models
         public List<Ticket> Tickets { get; set; } = new List<Ticket>();
         public string FullAddress => $"{Street} {HouseNumber}, {Location}";
 
-        // Nieuwe eigenschap voor evenementtype
+        [Required(ErrorMessage = "Evenementtype is verplicht.")]
         public string EventType { get; set; }
 
-        // Aangepaste validatie voor datum en tijd
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public static ValidationResult ValidateDate(DateTime date, ValidationContext context)
         {
-            var eventDateTime = Date.Add(Time);
-            var now = DateTime.Now;
-
-            if (eventDateTime <= now)
+            if (date < DateTime.Today)
             {
-                yield return new ValidationResult(
-                    "Datum en tijd moeten in de toekomst liggen.",
-                    new[] { nameof(Date), nameof(Time) });
+                return new ValidationResult("De datum moet in de toekomst liggen.", new[] { nameof(Date) });
             }
+            return ValidationResult.Success;
         }
     }
 }

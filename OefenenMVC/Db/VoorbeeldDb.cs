@@ -19,7 +19,7 @@ namespace OefenenMVC.Db
 
                 entity.Property(e => e.Name)
                       .HasMaxLength(100)
-                      .IsRequired(); // Naam is verplicht
+                      .IsRequired();
 
                 entity.Property(e => e.Description)
                       .HasMaxLength(500);
@@ -31,31 +31,30 @@ namespace OefenenMVC.Db
                       .HasColumnType("decimal(18,2)");
 
                 entity.Property(e => e.Date)
-                      .IsRequired(); // Datum is verplicht
+                      .IsRequired();
 
                 entity.Property(e => e.MaxParticipants)
-                      .IsRequired(); // Max deelnemers is verplicht
+                      .IsRequired();
 
                 entity.Property(e => e.SoldTickets)
-                      .IsRequired(); // Verkochte tickets zijn verplicht
+                      .IsRequired();
 
                 entity.Property(e => e.ImageData)
-                      .HasColumnType("varbinary(max)"); // Voor de afbeelding
+                      .HasColumnType("varbinary(max)"); 
 
                 entity.Property(e => e.ImageMimeType)
-                      .HasMaxLength(50); // MimeType van de afbeelding
+                      .HasMaxLength(50);
 
-                // Definieer latitude en longitude als string
                 entity.Property(e => e.Latitude)
-                      .HasMaxLength(50); // Maximale lengte voor latitude string
+                      .HasMaxLength(50);
 
                 entity.Property(e => e.Longitude)
-                      .HasMaxLength(50); // Maximale lengte voor longitude string
+                      .HasMaxLength(50);
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(u => u.Id); // Zorg ervoor dat hier Id wordt gebruikt
+                entity.HasKey(u => u.Id);
                 entity.Property(u => u.Name).HasMaxLength(100);
                 entity.Property(u => u.Email).HasMaxLength(100).IsRequired();
                 entity.Property(u => u.PhoneNumber).HasMaxLength(15);
@@ -75,11 +74,11 @@ namespace OefenenMVC.Db
                     Cost = 10.00m,
                     MaxParticipants = 100,
                     SoldTickets = 50,
-                    ImageData = null, // Voeg hier een afbeelding toe als dat nodig is
+                    ImageData = null,
                     ImageMimeType = null,
-                    Latitude = "50.8792533", // Voorbeeld latitude als string
-                    Longitude = "5.9836698",  // Voorbeeld longitude als string
-                    EventType = "Overig" // Geef hier een waarde voor EventType
+                    Latitude = "50.8792533",
+                    Longitude = "5.9836698", 
+                    EventType = "Overig" 
                 }
             );
         }

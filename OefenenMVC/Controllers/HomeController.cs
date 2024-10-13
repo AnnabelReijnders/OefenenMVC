@@ -27,13 +27,13 @@ namespace OefenenMVC.Controllers
         {
             try
             {
-                var events = await _context.Events.ToListAsync(); // Haal evenementen op uit de database
-                return View(events); // Geef de evenementen door aan de view
+                var events = await _context.Events.ToListAsync();
+                return View(events);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Fout bij het ophalen van evenementen.");
-                return RedirectToAction("Error"); // Redirect naar een foutpagina
+                return RedirectToAction("Error");
             }
         }
 
@@ -58,7 +58,6 @@ namespace OefenenMVC.Controllers
                     var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                     if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                     {
-                        // Login is succesvol, maak een cookie aan en stuur door naar de Start pagina
                         var claims = new List<Claim>
                         {
                             new Claim(ClaimTypes.Name, user.Email)
