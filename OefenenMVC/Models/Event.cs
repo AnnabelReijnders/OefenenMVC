@@ -12,6 +12,8 @@ namespace OefenenMVC.Models
         [Required(ErrorMessage = "Naam is verplicht.")]
         public string? Name { get; set; }
 
+        [Required(ErrorMessage = "Een beschrijving is verplicht.")]
+
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "Datum is verplicht.")]
