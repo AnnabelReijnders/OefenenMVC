@@ -12,8 +12,8 @@ using OefenenMVC.Db;
 namespace OefenenMVC.Migrations
 {
     [DbContext(typeof(VoorbeeldDb))]
-    [Migration("20241013204310_RemoveOrderNumberFromTickets")]
-    partial class RemoveOrderNumberFromTickets
+    [Migration("20241013212309_UpdateEventType")]
+    partial class UpdateEventType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace OefenenMVC.Migrations
                         {
                             EventID = 1,
                             Cost = 10.00m,
-                            Date = new DateTime(2024, 10, 13, 22, 43, 9, 618, DateTimeKind.Local).AddTicks(2747),
+                            Date = new DateTime(2024, 10, 13, 23, 23, 9, 143, DateTimeKind.Local).AddTicks(8306),
                             Description = "Dit is een test evenement",
                             EventType = "Overig",
                             Latitude = "50.8792533",

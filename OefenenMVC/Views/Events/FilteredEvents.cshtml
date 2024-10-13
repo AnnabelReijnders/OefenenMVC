@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gefilterde Evenementen</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Evenementen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         body {
             background-color: #1b1b1b; /* Zwart thema */
@@ -21,10 +21,15 @@
         .card {
             background-color: #333; /* Donkergrijs voor kaarten */
             border: none; /* Geen rand */
-            cursor: pointer; /* Cursor veranderen naar pointer bij hover */
+            width: 300px; /* Vaste breedte voor kaarten */
+            height: 400px; /* Vaste hoogte voor kaarten */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ruimte tussen elementen */
         }
 
             .card:hover {
+                cursor: pointer; /* Cursor veranderen naar pointer bij hover */
                 transform: scale(1.05); /* Klein effect bij hover */
                 transition: transform 0.2s; /* Smooth transition */
             }
@@ -32,6 +37,15 @@
         .card-img-top {
             height: 200px; /* Vaste hoogte voor afbeeldingen */
             object-fit: cover; /* Beeld vullen zonder vervorming */
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraal uitlijnen */
+            justify-content: center; /* Centraal uitlijnen */
+            text-align: center; /* Tekst centreren */
+            flex-grow: 1; /* Zorg ervoor dat de body de ruimte gebruikt */
         }
 
         .btn-primary {
@@ -47,37 +61,32 @@
 <body>
 
     <div class="container mt-4">
-        <h1>Gefilterde Evenementen</h1> <!-- Titel in oranje -->
+        <h1>Evenementen</h1> <!-- Titel in oranje -->
         <div class="row">
-            @if (!Model.Any())
+            @foreach (var evenement in Model)
             {
-                <div class="col-12">
-                    <div class="alert alert-info">Er zijn geen evenementen gevonden van dit type.</div>
-                </div>
-            }
-            else
-            {
-                foreach (var evenement in Model)
-                {
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm" onclick="location.href='@Url.Action("Details", "Events", new { id = evenement.EventID })';">
-                            <div class="card-body">
-                                <h5 class="card-title">@evenement.Name</h5>
-                                <p class="card-text">@evenement.Description</p>
-                                <p class="card-text"><small class="text-muted">@evenement.Date.ToString("dd MMM yyyy")</small></p>
-                                @if (evenement.ImageData != null)
-                                {
-                                    <img src="@Url.Action("GetImage", "Events", new { id = evenement.EventID })" alt="Event Image" class="card-img-top" />
-                                }
-                            </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm" onclick="location.href='@Url.Action("Details", "Events", new { id = evenement.EventID })';">
+                        @if (evenement.ImageData != null)
+                        {
+                            <img src="@Url.Action("GetImage", "Events", new { id = evenement.EventID })" alt="Event Image" class="card-img-top" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@evenement.Name</h5>
+                            <p class="card-text">
+                                @(evenement.Description.Length > 100
+                                    ? evenement.Description.Substring(0, 100) + "..."
+                                    : evenement.Description)
+                            </p>
+                            <p class="card-text"><small class="text-muted">@evenement.Date.ToString("dd MMM yyyy")</small></p>
                         </div>
                     </div>
-                }
+                </div>
             }
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap.min.js"></script>
 </body>
 </html>

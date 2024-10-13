@@ -79,6 +79,7 @@ namespace OefenenMVC.Db
                     ImageMimeType = null,
                     Latitude = "50.8792533", // Voorbeeld latitude als string
                     Longitude = "5.9836698",  // Voorbeeld longitude als string
+                    EventType = "Overig" // Geef hier een waarde voor EventType
                 }
             );
         }

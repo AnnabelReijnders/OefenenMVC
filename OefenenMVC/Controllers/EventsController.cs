@@ -45,7 +45,7 @@ namespace OefenenMVC.Controllers
         // POST: Events/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventID,Name,Description,Date,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude")] Event @event, IFormFile? imageFile)
+        public async Task<IActionResult> Create([Bind("EventID,Name,Description,Date,Time,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude,EventType")] Event @event, IFormFile? imageFile)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace OefenenMVC.Controllers
         // POST: Events/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventID,Name,Description,Date,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude")] Event @event, IFormFile? imageFile)
+        public async Task<IActionResult> Edit(int id, [Bind("EventID,Name,Description,Date,Time,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude,EventType")] Event @event, IFormFile? imageFile)
         {
             if (id != @event.EventID)
             {
