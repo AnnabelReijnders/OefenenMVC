@@ -23,7 +23,6 @@ Volg deze stappen om de applicatie lokaal te draaien:
 1. Clone de repository naar je lokale machine:
    ```bash
    git clone https://github.com/jouwgebruikersnaam/TicketScore.git
-2. Configureer de SQL Server database:
+2. Configureer de SQL Server database. Zorg ervoor dat je een SQL Server-database hebt draaien. Maak een database aan voor dit project en pas de verbindingsreeks aan in het appsettings.json-bestand van de applicatie.
    ```bash
-  Zorg ervoor dat je een SQL Server-database hebt draaien. Maak een database aan voor dit project en pas de verbindingsreeks aan in het appsettings.json-bestand van de applicatie.
-DATABASE_URL=mysql+pymysql://<username>:<password>@<host>:<port>/<database_name>
+git clone DATABASE_URL=mysql+pymysql://<username>:<password>@<host>:<port>/<database_name>
