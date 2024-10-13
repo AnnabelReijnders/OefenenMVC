@@ -27,8 +27,11 @@ namespace OefenenMVC.Models
         [Required(ErrorMessage = "Locatie is verplicht.")]
         public string? Location { get; set; }
 
-        public string? Street { get; set; }
-        public string? HouseNumber { get; set; }
+        [Required(ErrorMessage = "Straat is verplicht.")]
+        public string? Street { get; set; } // Verplicht
+
+        [Required(ErrorMessage = "Huisnummer is verplicht.")]
+        public string? HouseNumber { get; set; } // Verplicht
 
         [Required(ErrorMessage = "Kosten zijn verplicht.")]
         [Range(0, 9999999.99, ErrorMessage = "Kosten moeten tussen 0 en 9999999.99 liggen.")]
@@ -40,19 +43,19 @@ namespace OefenenMVC.Models
         public int MaxParticipants { get; set; }
 
         public int SoldTickets { get; set; }
-        public int AvailableSpots => MaxParticipants - SoldTickets;
+        public byte[]? ImageData { get; set; } // Verplicht
+        public string? ImageMimeType { get; set; } // Verplicht
 
-        public byte[]? ImageData { get; set; }
-        public string? ImageMimeType { get; set; }
+        [Required(ErrorMessage = "Latitude is verplicht.")]
+        public string Latitude { get; set; } // Verplicht
 
-        public string? Latitude { get; set; }
-        public string? Longitude { get; set; }
+        [Required(ErrorMessage = "Longitude is verplicht.")]
+        public string Longitude { get; set; } // Verplicht
+
+        [Required(ErrorMessage = "Evenementtype is verplicht.")]
+        public string EventType { get; set; } = "Overig"; // Standaard naar "Overig"
 
         public List<Ticket> Tickets { get; set; } = new List<Ticket>();
-        public string FullAddress => $"{Street} {HouseNumber}, {Location}";
-
-        // Nieuwe eigenschap voor evenementtype
-        public string EventType { get; set; } = "Overig"; // Standaard naar "Overig"
 
         // Aangepaste validatie voor datum en tijd
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
