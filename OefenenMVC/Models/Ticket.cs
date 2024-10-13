@@ -16,7 +16,5 @@ namespace OefenenMVC.Models
         public int Quantity { get; set; }  // Aantal gekochte tickets
         public decimal TotalPrice { get; set; }  // Totale prijs van de gekochte tickets
 
-        [Required]
-        public string OrderNumber { get; set; } // Uniek ordernummer voor de aankoop
     }
 }

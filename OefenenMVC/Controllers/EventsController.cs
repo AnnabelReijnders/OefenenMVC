@@ -202,7 +202,6 @@ namespace OefenenMVC.Controllers
                 UserId = user.Id,
                 Quantity = quantity,
                 TotalPrice = totalPrice,
-                OrderNumber = Guid.NewGuid().ToString() // Genereer een unieke OrderNumber
             };
 
             _context.Tickets.Add(ticket);
