@@ -1,0 +1,56 @@
+﻿@model IEnumerable<OefenenMVC.Models.Event>
+
+@{
+    ViewData["Title"] = "Aangemaakte Evenementen";
+}
+
+<style>
+    /* Achtergrondkleur van de pagina */
+    body {
+        background-color: #1b1b1b; /* Zwart thema */
+    }
+
+    .card {
+        background-color: #333; /* Donkergrijze achtergrond voor de kaarten */
+    }
+</style>
+
+<div class="container mt-4">
+    <h1 class="text-light text-center">Aangemaakte Evenementen</h1>
+
+    <!-- Button for creating a new event -->
+    <div class="text-center mb-4">
+        <a asp-action="Create" class="btn btn-warning btn-lg">Maak een Evenement Aan</a>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            var totalIncome = item.SoldTickets * item.Cost; // Bereken de totale inkomsten van de verkochte tickets
+
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    @if (item.ImageData != null)
+                    {
+                        <img src="@Url.Action("GetImage", "Events", new { id = item.EventID })" class="card-img-top" alt="Event Image" style="height: 200px; object-fit: cover;" />
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">Datum: @item.Date.ToString("dd MMM yyyy")</p>
+                        <p class="card-text">Tijd: @item.Time.ToString(@"hh\:mm")</p>
+                        <p class="card-text">Max Deelnemers: @item.MaxParticipants</p>
+                        <p class="card-text">Verkochte Tickets: @item.SoldTickets</p>
+                        <p class="card-text">Totale Inkomsten: €@totalIncome.ToString("F2")</p>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Edit" asp-route-id="@item.EventID" class="btn btn-warning">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.EventID" class="btn btn-primary">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.EventID" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

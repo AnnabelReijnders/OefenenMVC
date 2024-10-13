@@ -1,0 +1,131 @@
+﻿@model OefenenMVC.Models.Event
+
+@{
+    ViewData["Title"] = "Bewerk Evenement";
+}
+
+<div class="container mt-4">
+    <h1 class="text-light">Bewerk Evenement</h1>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Naam evenement</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="EventType" class="control-label"></label>
+            <select asp-for="EventType" class="form-control">
+                <option value="FoodTruckFestival">Foodtruckfestival</option>
+                <option value="TheaterPerformance">Theatervoorstelling</option>
+                <option value="DatingEvent">Dating Event</option>
+                <option value="MusicPerformance">Muziekoptreden</option>
+                <option value="Festival">Festival</option>
+                <option value="Overig">Overig</option>
+            </select>
+            <span asp-validation-for="EventType" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Beschrijving</label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Date" class="control-label">Datum</label>
+            <input asp-for="Date" class="form-control" type="date" />
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Time" class="control-label">Tijd</label>
+            <input asp-for="Time" class="form-control" type="time" />
+            <span asp-validation-for="Time" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Location" class="control-label">Stad</label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Street" class="control-label">Straat</label>
+            <input asp-for="Street" class="form-control" />
+            <span asp-validation-for="Street" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HouseNumber" class="control-label">Huisnummer</label>
+            <input asp-for="HouseNumber" class="form-control" />
+            <span asp-validation-for="HouseNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Cost" class="control-label">Kosten (€)</label>
+            <input asp-for="Cost" class="form-control" type="number" step="0.01" />
+            <span asp-validation-for="Cost" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MaxParticipants" class="control-label">Maximale deelnemers</label>
+            <input asp-for="MaxParticipants" class="form-control" />
+            <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Latitude" class="control-label">Breedtegraad</label>
+            <input asp-for="Latitude" class="form-control" />
+            <span asp-validation-for="Latitude" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Longitude" class="control-label">Lengtegraad</label>
+            <input asp-for="Longitude" class="form-control" />
+            <span asp-validation-for="Longitude" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Afbeelding Uploaden</label>
+            <div id="imageUpload" style="border: 2px dashed #FFA500; height: 200px; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative;">
+                <span>Klik hier om een afbeelding te uploaden</span>
+                <input type="file" name="ImageFile" class="form-control-file" style="display:none;" accept="image/*" onchange="previewImage(event)" />
+                <img id="imagePreview" src="@Url.Action("GetImage", "Events", new { id = Model.EventID })" alt="Afbeelding preview" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; right: 0; bottom: 0;" />
+            </div>
+        </div>
+
+        <input type="hidden" asp-for="EventID" />
+        <div class="form-group">
+            <input type="submit" value="Bewaar" class="btn btn-warning" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @Html.Partial("_ValidationScriptsPartial")
+    <script>
+        document.querySelector("div[style*='cursor: pointer']").addEventListener("click", function () {
+            this.querySelector("input[type='file']").click();
+        });
+
+        function previewImage(event) {
+            const imagePreview = document.getElementById('imagePreview');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result; // Set the src to the result from FileReader
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Read the file as a data URL
+            } else {
+                imagePreview.src = '@Url.Action("GetImage", "Events", new { id = Model.EventID })'; // Reset the src if no file is selected
+            }
+        }
+    </script>
+}

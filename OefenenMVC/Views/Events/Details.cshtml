@@ -1,0 +1,97 @@
+﻿@model OefenenMVC.Models.Event
+
+@{
+    ViewData["Title"] = "Details van Evenement";
+}
+
+<div class="container mt-4">
+    <div class="card bg-dark text-white">
+        @if (Model.ImageData != null)
+        {
+            <img src="@Url.Action("GetImage", "Events", new { id = Model.EventID })" class="card-img" alt="Event Image" style="height: 400px; object-fit: cover;" />
+        }
+
+        <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+            <div class="bg-dark bg-opacity-75 p-3 rounded">
+                <h1 class="card-title">@Model.Name</h1>
+                <p class="card-text">@Model.Date.ToString("dd MMM yyyy HH:mm")</p>
+                <p class="card-text">@Model.FullAddress</p>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ticketModal">Koop Tickets</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <p class="text-light">@Model.Description</p>
+    </div>
+
+    <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+</div>
+
+<!-- Modal voor het kopen van tickets -->
+<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ticketModalLabel">Tickets Kopen</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Aantal beschikbare plaatsen: <strong>@Model.AvailableSpots</strong></p>
+
+                @if (Model.AvailableSpots > 0)
+                {
+                    <form asp-action="PurchaseTickets" asp-controller="Events" method="post">
+                        <div class="form-group">
+                            <label for="quantity">Aantal tickets:</label>
+                            <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" required />
+                        </div>
+                        <input type="hidden" name="eventId" value="@Model.EventID" />
+                        <h4>Totaalprijs: €<span id="totalPrice">@Model.Cost.ToString("F2")</span></h4>
+                        <button type="submit" class="btn btn-warning">Koop Tickets</button>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-danger" style="text-align: center;">Uitverkocht</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Functie om de totale prijs bij te werken
+        document.getElementById("quantity").addEventListener("input", function () {
+            const pricePerTicket = parseFloat('@Model.Cost'); // Haal de prijs per ticket op
+            const quantity = parseInt(this.value); // Haal de ingevoerde hoeveelheid op
+            const totalPrice = (pricePerTicket * quantity).toFixed(2); // Bereken de totale prijs
+            document.getElementById("totalPrice").innerText = totalPrice; // Update de weergegeven totaalprijs
+        });
+    </script>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet" />
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoianVzdGJlbGxhYSIsImEiOiJjbTFsN283dm0wNjdiMnRzYndxMmIxa2Y5In0.Yk4dpATrQi71E6IEgiL1jQ'; // Vervang dit door je token
+
+        const longitude = parseFloat('@Model.Longitude');
+        const latitude = parseFloat('@Model.Latitude');
+
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/light-v10', // gebruik lichte kaartstijl
+            center: [longitude, latitude], // startpositie [lng, lat]
+            zoom: 12 // startzoom
+        });
+
+        // Marker toevoegen
+        const marker = new mapboxgl.Marker()
+            .setLngLat([longitude, latitude]) // Coördinaten voor de marker
+            .addTo(map);
+    </script>
+}

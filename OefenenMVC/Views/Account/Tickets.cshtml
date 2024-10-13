@@ -1,0 +1,103 @@
+﻿@model IEnumerable<OefenenMVC.Models.Ticket>
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gekochte Tickets</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #1b1b1b; /* Zwart thema */
+            color: #ffffff; /* Witte tekst */
+        }
+
+        h2 {
+            color: #FFA500; /* Oranje voor de titel */
+            margin-bottom: 30px; /* Meer ruimte onder de titel */
+        }
+
+        .card {
+            background-color: #444; /* Donkergrijs voor kaarten */
+            border: none; /* Geen rand */
+            transition: transform 0.2s; /* Smooth transition */
+        }
+
+            .card:hover {
+                cursor: pointer; /* Cursor veranderen naar pointer bij hover */
+                transform: scale(1.05); /* Klein effect bij hover */
+            }
+
+        .card-img-top {
+            height: 200px; /* Vaste hoogte voor afbeeldingen */
+            object-fit: cover; /* Beeld vullen zonder vervorming */
+        }
+
+        .modal-content {
+            background-color: #444; /* Donkergrijs voor modal */
+            color: white; /* Witte tekst in modal */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Uw Gekochte Tickets</h2> <!-- Titel in oranje -->
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info">Nog geen tickets gekocht.</div>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var ticket in Model)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card" data-bs-toggle="modal" data-bs-target="#ticketModal-@ticket.TicketId">
+                            <img class="card-img-top" src="@Url.Action("GetImage", "Events", new { id = ticket.EventId })" alt="Event Image" />
+                            <div class="card-body">
+                                <h5 class="card-title">@ticket.Event.Name</h5>
+                                <p class="card-text">Beschrijving: @ticket.Event.Description</p>
+                                <p class="card-text">Datum: @ticket.Event.Date.ToString("dd MMM yyyy")</p>
+                                <p class="card-text">Tijd: @ticket.Event.Time.ToString(@"hh\:mm")</p>
+                                <p class="card-text">Order Nummer: @ticket.TicketId</p>
+                            </div>
+                        </div>
+
+                        <!-- Modal voor Ticket Details -->
+                        <div class="modal fade" id="ticketModal-@ticket.TicketId" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="ticketModalLabel">Ticket Details</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Evenement:</strong> @ticket.Event.Name</p>
+                                        <p><strong>Aantal:</strong> @ticket.Quantity</p>
+                                        <p><strong>Totaalprijs:</strong> €@ticket.TotalPrice.ToString("F2")</p>
+                                        <p><strong>Datum:</strong> @ticket.Event.Date.ToString("dd MMM yyyy")</p>
+                                        <p><strong>Tijd:</strong> @ticket.Event.Time.ToString(@"hh\:mm")</p>
+                                        <p><strong>Locatie:</strong> @ticket.Event.FullAddress</p>
+                                        <p><strong>Order Nummer:</strong> @ticket.TicketId</p>
+                                        <img class="img-fluid" src="@Url.Action("GetImage", "Events", new { id = ticket.EventId })" alt="Event Image" />
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

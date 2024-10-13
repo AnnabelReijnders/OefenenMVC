@@ -1,0 +1,14 @@
+﻿@model OefenenMVC.Models.Event  // Zorg ervoor dat dit overeenkomt met je model
+
+<h2>Koop Tickets voor @Model.Name</h2>
+
+<p>Prijs per ticket: @Model.Cost.ToString("C")</p>
+
+<form asp-action="AddToCart" asp-controller="ShoppingCart" method="post">
+    <div class="form-group">
+        <label for="quantity">Selecteer het aantal tickets:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control" />
+    </div>
+    <input type="hidden" name="eventId" value="@Model.EventID" />
+    <button type="submit" class="btn btn-primary">Voeg toe aan winkelwagen</button>
+</form>

@@ -1,0 +1,25 @@
+﻿<h2>Bedankt voor uw aankoop!</h2>
+<p>Uw tickets zijn succesvol gekocht en zijn nu beschikbaar in uw account.</p>
+
+<!-- Timer voor de automatische doorverwijzing -->
+<div id="timer" class="alert alert-info" role="alert">
+    U wordt over <span id="countdown">5</span> seconden doorgestuurd naar uw tickets...
+</div>
+
+<script>
+    // Timer functie
+    let countdown = 5; // Start met 5 seconden
+    const countdownElement = document.getElementById("countdown");
+
+    // Interval om de timer bij te werken
+    const interval = setInterval(function() {
+        countdown--;
+        countdownElement.innerText = countdown;
+
+        if (countdown <= 0) {
+            clearInterval(interval); // Stop de timer
+            // Doorverwijzen naar de account/tickets pagina
+            window.location.href = '@Url.Action("Tickets", "Account")';
+        }
+    }, 1000); // Update elke seconde
+</script>
