@@ -20,6 +20,7 @@ namespace OefenenMVC.Controllers
         }
 
         // GET: Events
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Events.ToListAsync());
@@ -37,6 +38,7 @@ namespace OefenenMVC.Controllers
         }
 
         // GET: Events/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -45,6 +47,7 @@ namespace OefenenMVC.Controllers
         // POST: Events/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("EventID,Name,Description,Date,Time,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude,EventType")] Event @event, IFormFile? imageFile)
         {
             if (ModelState.IsValid)
@@ -67,6 +70,7 @@ namespace OefenenMVC.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var evenement = await _context.Events.FindAsync(id);
@@ -80,6 +84,7 @@ namespace OefenenMVC.Controllers
         // POST: Events/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("EventID,Name,Description,Date,Time,Location,Street,HouseNumber,Cost,MaxParticipants,Latitude,Longitude,EventType")] Event @event, IFormFile? imageFile)
         {
             if (id != @event.EventID)
@@ -132,6 +137,7 @@ namespace OefenenMVC.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,6 +155,7 @@ namespace OefenenMVC.Controllers
         }
 
         // POST: Events/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OefenenMVC.Models
 {
-    public class Voorbeeld
-    {
-        public int Id { get; set; }
-        [Required]
-        public string? Name { get; set; }
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-    }
+	public class Voorbeeld
+	{
+		public int Id { get; set; }
+		[Required]
+		public string? Name { get; set; }
+		public DateTime CreatedOn { get; set; } = DateTime.Now;
+	}
 }

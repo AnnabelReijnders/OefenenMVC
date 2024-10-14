@@ -5,20 +5,18 @@
 }
 
 <style>
-    /* Achtergrondkleur van de pagina */
     body {
-        background-color: #1b1b1b; /* Zwart thema */
+        background-color: #1b1b1b;
     }
 
     .card {
-        background-color: #333; /* Donkergrijze achtergrond voor de kaarten */
+        background-color: #333;
     }
 </style>
 
 <div class="container mt-4">
     <h1 class="text-light text-center">Aangemaakte Evenementen</h1>
 
-    <!-- Button for creating a new event -->
     <div class="text-center mb-4">
         <a asp-action="Create" class="btn btn-warning btn-lg">Maak een Evenement Aan</a>
     </div>
@@ -26,7 +24,6 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            // Bereken de totale inkomsten van de verkochte tickets
             var totalIncome = item.SoldTickets * item.Cost;
 
             <div class="col-md-4 mb-4">
@@ -56,6 +53,5 @@
     </div>
 </div>
 
-<!-- Voeg jQuery en Bootstrap JavaScript toe zonder Popper.js -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
